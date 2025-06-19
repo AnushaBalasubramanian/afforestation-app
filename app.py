@@ -30,6 +30,24 @@ ax.set_ylabel("Total CO₂ Absorbed (kg)")
 ax.set_title("Projected CO₂ Absorption by Trees")
 st.pyplot(fig)
 
+import folium
+from streamlit_folium import st_folium
+
+st.subheader("📍 Tree Plantation Site (Chennai)")
+
+# Create a map centered around Chennai
+chennai_map = folium.Map(location=[13.0827, 80.2707], zoom_start=10)
+
+# Add a marker for the plantation site
+folium.Marker(
+    location=[13.0827, 80.2707],
+    popup="🌳 Trees Planted Here - Chennai",
+    icon=folium.Icon(color="green", icon="leaf")
+).add_to(chennai_map)
+
+# Display the map in Streamlit
+st_folium(chennai_map, width=700, height=500)
+
 # Summary
 total = co2_absorbed[-1]
 st.success(f"🌍 By planting *{trees}* trees, you can absorb approximately *{total:,.2f} kg* of CO₂ over *{years} years*.")
